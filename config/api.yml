@@ -121,6 +121,7 @@
     :klass: ChargebackRate
     :subcollections:
     - :rates
+    - :tags
     :collection_actions:
       :get:
       - :name: read
@@ -144,6 +145,12 @@
       :delete:
       - :name: delete
         :identifier: chargeback_rates_delete
+    :tags_subcollection_actions:
+      :post:
+      - :name: assign
+        :identifier: chargeback_assignments
+      - :name: unassign
+        :identifier: chargeback_assignments
   :currencies:
     :description: Currencies
     :identifier: currency
