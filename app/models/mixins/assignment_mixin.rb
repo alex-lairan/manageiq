@@ -14,10 +14,18 @@ module AssignmentMixin
     # objects => A single item or array of items
     #   item  => A CI instance (not classification) or a CI id of klass
     # klass   => The class of the object that self is to be assigned to - (Takes both forms - Host or host, EmsCluster or ems_cluster)
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    pp objects
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
     objects.to_miq_a.each do |obj|
       if obj.kind_of?(ActiveRecord::Base) # obj is a CI
         tag = "#{obj.class.base_model.name.underscore}/id/#{obj.id}"
       else                                # obj is the id of an instance of <klass>
+        puts ':)'
         raise _("Class must be specified when object is an integer") if klass.nil?
         tag = "#{klass.underscore}/id/#{obj}"
       end
@@ -30,6 +38,13 @@ module AssignmentMixin
     # objects => A single item or array of items
     #   item  => A classification entry instance or a classification entry id
     # klass   => The class of the object that self is to be assigned to - (Takes both forms - Host or host, EmsCluster or ems_cluster)
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$TAGS$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    pp objects
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
+    puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
     objects.to_miq_a.each do |obj|
       unless obj.kind_of?(ActiveRecord::Base) # obj is the id of a classification entry instance
         id = obj

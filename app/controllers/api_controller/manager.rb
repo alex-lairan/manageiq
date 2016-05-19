@@ -9,6 +9,9 @@ class ApiController
 
       action = @req[:action]
       target = target_resource_method(is_subcollection, type, action)
+      puts "API MANAGER"
+      pp target
+      pp respond_to?(target)
       raise BadRequestError,
             "Unimplemented Action #{action} for #{type} resources" unless respond_to?(target)
 
@@ -85,6 +88,10 @@ class ApiController
       if is_subcollection
         "#{type}_#{action}_resource"
       else
+        print 'action: '
+        pp action
+        print 'type: '
+        pp type
         target = "#{action}_resource"
         typed_target = "#{target}_#{type}"
         return typed_target if respond_to?(typed_target)

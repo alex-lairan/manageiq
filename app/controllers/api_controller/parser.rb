@@ -261,6 +261,8 @@ class ApiController
 
       if action_hash.present?
         raise BadRequestError, "Disabled Action #{aname} for the #{cname} #{type} specified" if action_hash[:disabled]
+        puts "\n\n\n\n\n\n\n\n\n\n\n\\n\n\n\n\n\n\n\n\n\n\nn\n\n\n\n\n\n\n\\nn\n\\n\n\nn\n\n\n\n\n\n\n\n\n\n"
+        pp action_hash[:identifier]
         raise Forbidden, "Use of Action #{aname} is forbidden" unless api_user_role_allows?(action_hash[:identifier])
       end
 

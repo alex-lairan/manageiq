@@ -138,6 +138,8 @@
       - :name: read
         :identifier: chargeback
       :post:
+      - :name: foo
+        :identifier: chargeback_rates_edit
       - :name: edit
         :identifier: chargeback_rates_edit
       - :name: delete

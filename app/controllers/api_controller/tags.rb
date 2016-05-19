@@ -12,6 +12,16 @@ class ApiController
 
     def tags_assign_resource(object, _type, id = nil, data = nil)
       tag_spec = tag_specified(id, data)
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
+      puts '-'
       tag_subcollection_action(tag_spec) do
         api_log_info("Assigning #{tag_ident(tag_spec)}")
         ci_set_tag(object, tag_spec)
@@ -154,14 +164,22 @@ class ApiController
     end
 
     def ci_set_tag(ci, tag_spec)
+      puts 'ci_set_tag'
+      require 'pp'
+      pp ci
+      pp tag_spec
       if ci_is_tagged_with?(ci, tag_spec)
+        puts "\tif?"
         desc = "Already tagged with #{tag_ident(tag_spec)}"
         success = true
       else
+        puts "\telse?"
         desc = "Assigning #{tag_ident(tag_spec)}"
         Classification.classify(ci, tag_spec[:category], tag_spec[:name])
         success = ci_is_tagged_with?(ci, tag_spec)
+        pp success
       end
+      puts 'Success?'
       action_result(success, desc)
     rescue => err
       action_result(false, err.to_s)

@@ -342,6 +342,9 @@ class ChargebackController < ApplicationController
       cb_assign_set_record_vars
       rate_type = x_node.split('-').last
       begin
+        puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------\n-------------\n"
+        pp rate_type
+        pp @edit[:set_assignments]
         ChargebackRate.set_assignments(rate_type, @edit[:set_assignments])
       rescue StandardError => bang
         render_flash(_("Error during 'Rate assignments': %{error_message}") % {:error_message => bang.message}, :error)
@@ -864,8 +867,8 @@ class ChargebackController < ApplicationController
 
     if @record || @in_a_form ||
        (@pages && (@items_per_page == ONE_MILLION || @pages[:items] == 0))
-      if ["chargeback_rates_copy", "chargeback_rates_edit", "chargeback_rates_new"].include?(@sb[:action]) ||
-         (x_active_tree == :cb_assignments_tree && ["Compute", "Storage"].include?(x_node.split('-').last))
+      if %w(chargeback_rates_copy chargeback_rates_edit chargeback_rates_new).include?(@sb[:action]) ||
+         (x_active_tree == :cb_assignments_tree && %w(Compute Storage).include?(x_node.split('-').last))
         presenter.hide(:toolbar)
         # incase it was hidden for summary screen, and incase there were no records on show_list
         presenter.show(:paging_div, :form_buttons_div).hide(:pc_div_1)

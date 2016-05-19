@@ -60,6 +60,7 @@ class ApiController < ApplicationController
   include_concern 'Categories'
   include_concern 'CustomAttributes'
   include_concern 'Conditions'
+  # include_concern 'ChargebackRate'
   include_concern 'Groups'
   include_concern 'Policies'
   include_concern 'PolicyActions'
@@ -174,11 +175,13 @@ class ApiController < ApplicationController
     parse_api_request
     log_api_request
     validate_api_request
+    pp validate_api_request
     api_error_type(:not_found, "Unknown resource specified") unless redirect_api_request(expected_method)
     log_api_response
   end
 
   def show    # GET
+    pp self
     api_request_handler(:show)
   end
 

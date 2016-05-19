@@ -69,6 +69,11 @@ class Classification < ApplicationRecord
 
   def self.classify(obj, category_name, entry_name, is_request = true)
     cat = Classification.find_by_name(category_name, obj.region_id)
+    pp category_name
+    pp obj
+    puts obj.region_id
+    puts 'classify?'
+    pp cat
     unless cat.nil?
       ent = cat.find_entry_by_name(entry_name, obj.region_id)
       ent.assign_entry_to(obj, is_request) unless ent.nil? || obj.is_tagged_with?(ent.to_tag, :ns => "none")

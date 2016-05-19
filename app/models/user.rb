@@ -120,11 +120,15 @@ class User < ApplicationRecord
   alias_method :miq_group_description, :ldap_group
 
   def role_allows?(options = {})
+    pp miq_user_role
     return false if miq_user_role.nil?
+    puts "\n\n\n\n\n\n\n"
+    pp miq_user_role.allows?(options)
     return true if miq_user_role.allows?(options)
 
     ident = options[:identifier]
     parent = MiqProductFeature.feature_parent(ident)
+    pp parent
     return false if parent.nil?
 
     if MiqProductFeature.feature_hidden(ident)

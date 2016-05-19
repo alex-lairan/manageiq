@@ -462,6 +462,7 @@ class ApiController
 
     def api_user_role_allows?(action_identifier)
       return true unless action_identifier
+      pp @auth_user_obj
       @auth_user_obj.role_allows?(:identifier => action_identifier)
     end
 
