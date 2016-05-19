@@ -99,7 +99,8 @@ module ActsAsTaggable
 
   def tag_add(list, options = {})
     ns = Tag.get_namespace(options)
-
+    puts 'tag add'
+    pp ns
     # Apply new tags
     Tag.transaction do
       Tag.parse(list).each do |name|

@@ -23,12 +23,15 @@ module AssignmentMixin
     puts '$$$$$$$$$$$$$$$$$$$$$$$$$$$$'
     objects.to_miq_a.each do |obj|
       if obj.kind_of?(ActiveRecord::Base) # obj is a CI
+        puts ':('
         tag = "#{obj.class.base_model.name.underscore}/id/#{obj.id}"
       else                                # obj is the id of an instance of <klass>
         puts ':)'
         raise _("Class must be specified when object is an integer") if klass.nil?
         tag = "#{klass.underscore}/id/#{obj}"
       end
+      pp tag
+      pp namespace
       tag_add(tag, :ns => namespace)
     end
     reload

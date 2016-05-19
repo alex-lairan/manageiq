@@ -52,9 +52,11 @@ class ChargebackRate < ApplicationRecord
     ChargebackRate.where(:rate_type => type.to_s.capitalize).each(&:remove_all_assigned_tos)
 
     cb_rates.each do |rate|
+      pp rate
       rate[:cb_rate].assign_to_objects(rate[:object]) if rate.key?(:object)
       rate[:cb_rate].assign_to_tags(*rate[:tag])      if rate.key?(:tag)
     end
+    puts "end set assignement"
   end
 
   def self.seed
